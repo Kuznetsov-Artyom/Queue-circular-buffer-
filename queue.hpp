@@ -39,15 +39,26 @@ public:
 	}
 
 
+
+
 	~Queue() { delete[] mArr; }
 
 
 
+
+	// Проверяет на пустоту
 	bool empty() const noexcept { return mCount == 0; }
+	// Проверяет на заполненность
 	bool full() const noexcept { return mCount == mSize; }
 
+
+
+
+	// Возвращает количество элементов на данный момент в очереди
 	size_t size() const noexcept { return mCount; }
+	// Возвращает ёмкость очереди (максимальное количество элементов)
 	size_t capacity() const noexcept { return mSize; }
+	// Возвращает значение элемента с головы, не вынимая его из очреди
 	T head() const 
 	{ 
 		if (empty())
@@ -55,6 +66,7 @@ public:
 
 		return mArr[mHead];
 	}
+	// Возвращает значение элемента с хвоста, не вынимая его из очреди
 	T tail() const 
 	{
 		if (empty())
@@ -66,6 +78,7 @@ public:
 
 
 
+	// Добавляет элмент в хвост очереди
 	void push(T value)
 	{
 		if (full())
@@ -75,6 +88,7 @@ public:
 		mTail = (mTail + 1) % mSize;
 		++mCount;
 	}
+	// Забирает элемент с головы очереди
 	T pop()
 	{
 		if (empty())
@@ -88,6 +102,10 @@ public:
 		return value;
 	}
 
+
+
+
+	// Выводит все элементы очереди в консоль
 	void showData()
 	{
 		for (size_t i = mHead, cnt = 0; cnt < mCount ; i = (i + 1) % mSize, ++cnt)
@@ -98,6 +116,9 @@ public:
 	}
 
 
+
+
+	// Перегрузка оператора присваивания
 	Queue& operator = (const Queue& other)
 	{
 		if (this == &other) return *this;
